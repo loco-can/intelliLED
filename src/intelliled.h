@@ -29,18 +29,23 @@
 #ifndef INTELLILED_H
 #define INTELLILED_H
 
-#define uint16_INTELLILED_RED 0
-#define uint16_INTELLILED_GREEN 1
-#define uint16_INTELLILED_YELLOW 2
+#define INTELLILED_RED 0
+#define INTELLILED_GREEN 1
+#define INTELLILED_YELLOW 2
 
 
 class INTELLILED {
 
   public:
     INTELLILED(void);
-    INTELLILED(uint16_t port, uint16_t port1=false);
-    void begin(uint16_t port, uint16_t port1=false);
+    INTELLILED(uint16_t port);
+    INTELLILED(uint16_t port, uint16_t port1);
+
+    void begin(uint16_t port);
+    void begin(uint16_t port, uint16_t port1);
+
     uint8_t available(void);
+
     void setBlink(uint16_t);
     void forceBlink(uint16_t);
     void blink(uint16_t);
@@ -70,7 +75,8 @@ class INTELLILED {
     double _timeout;
     uint16_t _blink_time;
 
-	void _set_led(uint16_t);
+    void _begin(uint16_t, uint16_t);
+    void _set_led(uint16_t);
     void _clear_led(void);
     void _on(void);
     void _off(void);
