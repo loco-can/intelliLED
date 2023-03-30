@@ -1,5 +1,5 @@
 /*
- * INTELLILED class
+ * uint16_tELLILED class
  * 
  * @autor: Thomas Winkler
  * @copyright: 2019-11-17
@@ -11,11 +11,11 @@
  */
  
 /*
- * The INTELLILED class controlles an output for display.
+ * The uint16_tELLILED class controlles an output for display.
  * With set_blink a blink style can be added, updated with the blink() method.
  * 
- * blink(int): set the blink time in ms
- * flash(): the INTELLILED only flashes 10 ms in the speed set by time()
+ * blink(uint16_t): set the blink time in ms
+ * flash(): the uint16_tELLILED only flashes 10 ms in the speed set by time()
  *
  * on(): switch the led on
  * off(): switch the led off
@@ -26,49 +26,51 @@
  * forceFlash(time): set a time to flash, even at on state
  */
 
-#ifndef INTELLILED_H
-#define INTELLILED_H
+#ifndef uint16_tELLILED_H
+#define uint16_tELLILED_H
 
-#define INTELLILED_RED 0
-#define INTELLILED_GREEN 1
-#define INTELLILED_YELLOW 2
+#define uint16_tELLILED_RED 0
+#define uint16_tELLILED_GREEN 1
+#define uint16_tELLILED_YELLOW 2
 
 
-class INTELLILED {
+class uint16_tELLILED {
 
   public:
-    INTELLILED(void);
-    INTELLILED(int port, int port1=false);
-    void begin(int port, int port1=false);
+    uint16_tELLILED(void);
+    uint16_tELLILED(uint16_t port, uint16_t port1=false);
+    void begin(uint16_t port, uint16_t port1=false);
     uint8_t available(void);
-    void setBlink(int);
-    void forceBlink(int);
-    void blink(int);
-    void flash(int);
+    void setBlink(uint16_t);
+    void forceBlink(uint16_t);
+    void blink(uint16_t);
+    void flash(uint16_t);
     void on(void);
     void off(void);
-    void color(int);
-    void color(int, int);
-    void offColor(int);
+    void color(uint16_t);
+    void color(uint16_t, uint16_t);
+    void offColor(uint16_t);
     void toggle(void);
     void update(void);
 
   private:
     bool _is_on;
-    int _force_blink;
+    uint16_t _force_blink;
     bool _flash_status;
 
-    int _led_port = NULL;
-    int _led_port1 = NULL;
+    uint16_t _led_port;
+    uint16_t _led_port1;
+
+    uint8_t _led_count;
     
-    int _led_color;
-    int _led_color1;
+    uint16_t _led_color;
+    uint16_t _led_color1;
     bool _off_color;
     
     double _timeout;
-    int _blink_time;
+    uint16_t _blink_time;
 
-	void _set_led(int);
+	void _set_led(uint16_t);
     void _clear_led(void);
     void _on(void);
     void _off(void);

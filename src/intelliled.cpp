@@ -28,6 +28,13 @@ void INTELLILED::begin(int port, int port1) {
   
   _led_port = port;
   _led_port1 = port1;
+
+  _led_count = 1;
+  
+  if (port1 != false) {
+    _led_count++;
+  }
+
   _led_color = 0;
   _blink_time = 0;
   _force_blink = 0;
@@ -53,21 +60,7 @@ void INTELLILED::begin(int port, int port1) {
  */
 uint8_t INTELLILED::available(void) {
 
-  uint8_t status;
-
-  if (_led_port != NULL) {
-    status = 1;
-
-    if (_led_port1 != NULL) {
-      status = 2;
-    }
-  }
-
-  else {
-    status = 0;
-  }
-
-  return status;
+  return _led_count;
 }
 
 
