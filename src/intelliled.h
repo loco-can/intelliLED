@@ -1,5 +1,5 @@
 /*
- * uint16_tELLILED class
+ * INTELLILED class
  * 
  * @autor: Thomas Winkler
  * @copyright: 2019-11-17
@@ -11,11 +11,11 @@
  */
  
 /*
- * The uint16_tELLILED class controlles an output for display.
+ * The INTELLILED class controlles an output for display.
  * With set_blink a blink style can be added, updated with the blink() method.
  * 
  * blink(uint16_t): set the blink time in ms
- * flash(): the uint16_tELLILED only flashes 10 ms in the speed set by time()
+ * flash(): the INTELLILED only flashes 10 ms in the speed set by time()
  *
  * on(): switch the led on
  * off(): switch the led off
@@ -26,19 +26,19 @@
  * forceFlash(time): set a time to flash, even at on state
  */
 
-#ifndef uint16_tELLILED_H
-#define uint16_tELLILED_H
+#ifndef INTELLILED_H
+#define INTELLILED_H
 
-#define uint16_tELLILED_RED 0
-#define uint16_tELLILED_GREEN 1
-#define uint16_tELLILED_YELLOW 2
+#define uint16_INTELLILED_RED 0
+#define uint16_INTELLILED_GREEN 1
+#define uint16_INTELLILED_YELLOW 2
 
 
-class uint16_tELLILED {
+class INTELLILED {
 
   public:
-    uint16_tELLILED(void);
-    uint16_tELLILED(uint16_t port, uint16_t port1=false);
+    INTELLILED(void);
+    INTELLILED(uint16_t port, uint16_t port1=false);
     void begin(uint16_t port, uint16_t port1=false);
     uint8_t available(void);
     void setBlink(uint16_t);
