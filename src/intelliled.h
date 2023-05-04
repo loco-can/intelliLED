@@ -41,6 +41,8 @@ class INTELLILED {
     INTELLILED(int port, int port1=false);
     void begin(int port, int port1=false);
     uint8_t available(void);
+    uint16_t port(void);
+    uint16_t port1(void);
     void setBlink(int);
     void forceBlink(int);
     void blink(int);

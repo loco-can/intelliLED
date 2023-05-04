@@ -7,7 +7,7 @@
  */
 
 #include <Arduino.h>
-#include "intelliled.h"
+#include "intelliLed.h"
 
 
 /*
@@ -70,6 +70,20 @@ uint8_t INTELLILED::available(void) {
   return status;
 }
 
+
+/*
+ * get port of led 1
+ */
+uint16_t INTELLILED::port(void) {
+  return _led_port;
+}
+
+/*
+ * get port of led 2
+ */
+uint16_t INTELLILED::port1(void) {
+  return _led_port1;
+}
 
 /*
  * update led: blink or flash
