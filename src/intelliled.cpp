@@ -19,15 +19,39 @@ INTELLILED::INTELLILED(void) {
 }
 
 
-INTELLILED::INTELLILED(int port, int port1) {
+INTELLILED::INTELLILED(uint16_t port) {
+  begin(port);
+}
+
+
+INTELLILED::INTELLILED(uint16_t port, uint16_t port1) {
   begin(port, port1);
 }
 
 
-void INTELLILED::begin(int port, int port1) {
-  
+// init with one port
+void INTELLILED::begin(uint16_t port) {
+
+  _led_count = 1;
+
+  _begin(port, false);
+}
+
+
+// init with two ports for dual led
+void INTELLILED::begin(uint16_t port, uint16_t port1) {
+
+  _led_count = 2;
+
+  _begin(port, port1);
+}
+
+
+void INTELLILED::_begin(uint16_t port, uint16_t port1) { 
+
   _led_port = port;
   _led_port1 = port1;
+
   _led_color = 0;
   _blink_time = 0;
   _force_blink = 0;
@@ -53,21 +77,7 @@ void INTELLILED::begin(int port, int port1) {
  */
 uint8_t INTELLILED::available(void) {
 
-  uint8_t status;
-
-  if (_led_port != NULL) {
-    status = 1;
-
-    if (_led_port1 != NULL) {
-      status = 2;
-    }
-  }
-
-  else {
-    status = 0;
-  }
-
-  return status;
+  return _led_count;
 }
 
 
@@ -100,7 +110,7 @@ void INTELLILED::update(void) {
   if (_blink_time != 0) {
 
     // timed out
-    if (millis() > (_timeout + (int)_blink_time)) {
+    if (millis() > (_timeout + (uint16_t)_blink_time)) {
 
       // flash
       if (_flash_status == true) {
@@ -140,7 +150,7 @@ void INTELLILED::toggle(void) {
 /*
  * set blink with time in ms
  */
-void INTELLILED::blink(int blink_time) {
+void INTELLILED::blink(uint16_t blink_time) {
 
   _flash_off();
   _blink_time = blink_time;
@@ -150,7 +160,7 @@ void INTELLILED::blink(int blink_time) {
 /*
  * set ony blink time in ms
  */
-void INTELLILED::setBlink(int blink_time) {
+void INTELLILED::setBlink(uint16_t blink_time) {
 
   _blink_time = blink_time;
 }
@@ -159,7 +169,7 @@ void INTELLILED::setBlink(int blink_time) {
 /*
  * force to blink, even if only on with time in ms
  */
-void INTELLILED::forceBlink(int blink_time) {
+void INTELLILED::forceBlink(uint16_t blink_time) {
 
   _force_blink = blink_time;
 }
@@ -169,7 +179,7 @@ void INTELLILED::forceBlink(int blink_time) {
  * set flash time in ms
  * INTELLILED is on for 5mx
  */
-void INTELLILED::flash(int blink_time) {
+void INTELLILED::flash(uint16_t blink_time) {
   _blink_time = blink_time;
   _flash_on();
 }
@@ -201,17 +211,17 @@ void INTELLILED::off(void) {
  * don't effect normal led
  */
 
-void INTELLILED::color(int color) {
+void INTELLILED::color(uint16_t color) {
   _led_color = color;
   _off_color = false;
 }
 
-void INTELLILED::color(int color, int color1) {
+void INTELLILED::color(uint16_t color, uint16_t color1) {
   _led_color = color;
   offColor(color1);
 }
 
-void INTELLILED::offColor(int color) {
+void INTELLILED::offColor(uint16_t color) {
   _led_color1 = color;
   _off_color = true;
 }
@@ -233,7 +243,7 @@ void INTELLILED::_reset(void) {
 /*
  * set led with colour
  */
-void INTELLILED::_set_led(int color) {
+void INTELLILED::_set_led(uint16_t color) {
 
 	switch(color) {
 		
