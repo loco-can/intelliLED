@@ -62,7 +62,7 @@ void INTELLILED::_begin(uint16_t port, uint16_t port1) {
   pinMode(_led_port, OUTPUT);
   
   if (_led_port1) {
-    pinMode(_led_port1, OUTPUT);
+	pinMode(_led_port1, OUTPUT);
   }
 
   _reset();
@@ -102,30 +102,30 @@ uint16_t INTELLILED::port1(void) {
 void INTELLILED::update(void) {
 
   if (_force_blink) {
-    _blink_time = _force_blink;
+	_blink_time = _force_blink;
   }
 
 
   // blink or flash
   if (_blink_time != 0) {
 
-    // timed out
-    if (millis() > (_timeout + (uint16_t)_blink_time)) {
+	// timed out
+	if (millis() > (_timeout + (uint16_t)_blink_time)) {
 
-      // flash
-      if (_flash_status == true) {
-        _on();
-        delay(10);
-        _off();
-      }
+	  // flash
+	  if (_flash_status == true) {
+		_on();
+		delay(10);
+		_off();
+	  }
 
-      // blink
-      else {
-        toggle();
-      }
+	  // blink
+	  else {
+		toggle();
+	  }
 
-      _timeout = millis();
-    }
+	  _timeout = millis();
+	}
   }
 }
 
@@ -137,12 +137,12 @@ void INTELLILED::toggle(void) {
 
   if (_is_on) {
   
-    _off();
-    _is_on = false;
+	_off();
+	_is_on = false;
   }
 
   else {
-    _on();
+	_on();
   }
 }
 
@@ -191,8 +191,8 @@ void INTELLILED::flash(uint16_t blink_time) {
 void INTELLILED::on(void) {
 
   if (!_force_blink) {
-    _reset();
-    _on();
+	_reset();
+	_on();
   }
 }
 
@@ -201,7 +201,7 @@ void INTELLILED::on(void) {
  */
 void INTELLILED::off(void) {
 
-    _reset();
+	_reset();
 }
 
 
@@ -233,7 +233,7 @@ void INTELLILED::offColor(uint16_t color) {
 void INTELLILED::_reset(void) {
 
   if (!_force_blink) {
-    blink(0);
+	blink(0);
   }
 
   _off();
@@ -247,21 +247,21 @@ void INTELLILED::_set_led(uint16_t color) {
 
 	switch(color) {
 		
-        case INTELLILED_RED:
-          digitalWrite(_led_port, HIGH);
-          digitalWrite(_led_port1, LOW);
-          break;
+		case INTELLILED_RED:
+		  digitalWrite(_led_port, HIGH);
+		  digitalWrite(_led_port1, LOW);
+		  break;
   
-        case INTELLILED_GREEN:
-          digitalWrite(_led_port, LOW);
-          digitalWrite(_led_port1, HIGH);
-          break;
+		case INTELLILED_GREEN:
+		  digitalWrite(_led_port, LOW);
+		  digitalWrite(_led_port1, HIGH);
+		  break;
   
-       case INTELLILED_YELLOW:
-          digitalWrite(_led_port, HIGH);
-          digitalWrite(_led_port1, HIGH);
-          break;
-    }
+	   case INTELLILED_YELLOW:
+		  digitalWrite(_led_port, HIGH);
+		  digitalWrite(_led_port1, HIGH);
+		  break;
+	}
 }
 
 
@@ -273,7 +273,7 @@ void INTELLILED::_clear_led() {
   digitalWrite(_led_port, LOW);
 
   if (_led_port1) {
-    digitalWrite(_led_port1, LOW);
+	digitalWrite(_led_port1, LOW);
   }
 }
 
@@ -287,10 +287,10 @@ void INTELLILED::_on(void) {
 
   // multicolor INTELLILED
   if (_led_port1) {
-    _set_led(_led_color);
+	_set_led(_led_color);
   }
   else {
-    digitalWrite(_led_port, HIGH);
+	digitalWrite(_led_port, HIGH);
   }
 }
 
@@ -305,23 +305,23 @@ void INTELLILED::_off(void) {
   // has off color
   if (_off_color) {
 
-    if (_flash_status) {
-      _clear_led();
-      delay(50);
-      _set_led(_led_color1);
-      delay(10);
-      _clear_led();
-    }
+	if (_flash_status) {
+	  _clear_led();
+	  delay(50);
+	  _set_led(_led_color1);
+	  delay(10);
+	  _clear_led();
+	}
 
-    else {
-      _set_led(_led_color1);
-    }
+	else {
+	  _set_led(_led_color1);
+	}
 
   }
 
   // light off
   else {
-    _clear_led();
+	_clear_led();
   }
 }
 
