@@ -6,7 +6,6 @@
  * @lizence: CC0
  */
 
-#include <Arduino.h>
 #include "intelliLed.h"
 
 

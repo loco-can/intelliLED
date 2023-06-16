@@ -29,6 +29,9 @@
 #ifndef INTELLILED_H
 #define INTELLILED_H
 
+#include <Arduino.h>
+
+
 #define INTELLILED_RED 0
 #define INTELLILED_GREEN 1
 #define INTELLILED_YELLOW 2
